@@ -1,0 +1,87 @@
+﻿@model IEnumerable<BringMe.Models.Product>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/catalog.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Каталог</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="/Home/Index">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="/Home/Index">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="/Home/Index">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+                <a href="/views/createProduct.html">Изделия</a>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="catalog">
+        <div class="catalog-purchase-title">
+            <label for="purchase-title">Изделия</label>
+        </div>
+        <div class="catalog-rows">
+            @foreach (var product in Model)
+            {
+                <div class="card">
+                    <img src="@product.ImageUrl" name="Picture" alt="stuff">
+                    <div class="card-title" name="Name">@product.Name</div>
+                    <div name="Size">@product.Size</div>
+                    <div name="Mass">@product.Mass</div>
+                    <div name="Description">@product.Description</div>
+                    <div class="price">
+                        <div class="card-title" name="Price">@product.Price</div>
+                        @using (Html.BeginForm("Delivery", "Home", new { value = @product.Id }, FormMethod.Post))
+                        {
+                            <button type="submit" class="make-order" name="CardDetails" value="@product.Id" style="left:0px;">Подробнее</button>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

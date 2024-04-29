@@ -1,0 +1,81 @@
+﻿.create-storagehouse {
+    border-radius: 15px;
+    border: 2px solid #90FF39;
+    padding: 30px 30px;
+    height: 400px;
+    width: 1000px;
+}
+
+    .create-storagehouse input[name="Address"] {
+        border-radius: 15px;
+        height: 50px;
+        border-color: #90FF39;
+    }
+
+input[name="Warehouse"] {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 4px;
+}
+
+.create-storagehouse label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+div[name="check-storage"] {
+    display: flex;
+    align-items: center;
+}
+
+input[name="create-storage-button"] {
+    margin-top: 25px;
+    position: relative;
+    border-radius: 15px;
+    top: 100px;
+    left: 750px;
+    width: 210px;
+    height: 50px;
+    border-color: #90FF39;
+}
+
+#profile-storage-info {
+    font-size: 1.4em;
+    margin-top: 40px;
+    display: flex;
+}
+
+    #profile-storage-info label {
+        margin-top: 0;
+        padding-top: 20px;
+        padding-bottom: 15px;
+        border-radius: 15px 15px 0 0;
+        background-color: #90FF39;
+        text-align: center;
+    }
+
+#profile-storage {
+    border-radius: 15px 15px 0 0;
+    border: 2px solid #90FF39;
+    width: 100%;
+    height: 100%;
+}
+
+#profile-pickup-point {
+    border-radius: 15px 15px 0 0;
+    border: 2px solid #90FF39;
+    width: 100%;
+    height: 100%;
+    margin: 0 40px;
+    margin-right: 0;
+}
+
+    #profile-storage div,
+    #profile-pickup-point div {
+        padding: 10px;
+        border: 1px solid #90FF39;
+        border-bottom: none;
+        border-right: none;
+        border-left: none;
+    }

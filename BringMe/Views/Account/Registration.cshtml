@@ -1,0 +1,36 @@
+﻿@model BringMe.Models.Registration
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reg.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Reg</title>
+</head>
+<body>
+    <form method="post" id="main-form" asp-controller="AccountController" sap-action="Registration" onsubmit="return regCheckForm(this)">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div></div>
+        <h1>Регистрация</h1>
+        <label for="name">Имя:</label>
+        <input type="text" name="Name" placeholder="Имя" id="name"><br><br>
+        <label for="email">Почта:</label>
+        <input type="text" name="Email" placeholder="Email" id="email"><br><br>
+        <label for="password">Пароль:</label>
+        <input type="password" name="Password" placeholder="Пароль" id="pass"><br><br>
+        <label for="repass">Проверка пароля:</label>
+        <input type="password" name="PasswordConfirm" placeholder="Проверка пароля" id="repass"><br><br>
+        <input type="radio" name="Role" id="buyer" value="buyer">
+        <label for="buyer-radio-button">Покупатель</label>
+        <input type="radio" name="Role" id="company" value="company">
+        <label for="company-radio-button">Компания</label><br><br>
+        <div id="error" style="color: red;"></div>
+        <input type="submit" onclick="" name="submit" value="Зарегестрироваться">
+    </form>
+
+    <script src="/js/auth.js"></script>
+</body>
+</html>
+    

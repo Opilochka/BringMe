@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BringMe.Models.Locality>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/delivery.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/profileBuyer.css">
+    <link rel="stylesheet" href="/css/createStorageHouse.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Оформление доставки</title>
+</head>
+<body>
+    <div class="profile-data">
+        <span>@User.Identity.Name</span>
+    </div>
+
+    <form class="main-form-create-delivery" id="main-form-create-delivery" method="post" asp-controller="ProfileBuyer" sap-action="Delivery" onsubmit="return checkCreateDelivery(this)">
+        <div class="otstup">
+            <label for="PickupPoint">Выберите пункт выдачи</label><br>
+            <select name="PickupPoint" id="pickupPoint">
+                @foreach (var locality in Model)
+                {
+                    @if (locality.Warehouse == false)
+                    {
+                        <option value="@locality.Id">@locality.Address</option>
+                    }
+                }
+            </select>
+
+            <label for="DateDelivery">Дата доставки:</label><br>
+            <input id="dateDelivery" type="date" name="DataDelivery">
+            <label for="TypeTransport">Тип транспорта:</label>
+            <select name="TypeTransport" id="typeTransport">
+                <option value="На авто">Автомобиль</option>
+                <option value="2">Самолет</option>
+                <option value="3">Корабль</option>
+            </select>
+        </div>
+        <div class="otstup">
+            <div id="delivery-select-container">
+                <label for="DeliverySelect">Выберите тип доставки:</label><br>
+                <div name="delivery-select-radio">
+                    <input type="radio" onchange="" name="DeliverySelect" value="cheap">
+                    <label for="cheap">Самый дешевый</label><br><br>
+                </div>
+                <div name="delivery-select-radio">
+                    <input type="radio" name="DeliverySelect" value="fast">
+                    <label for="cheap">Самый быстрый</label>
+                </div>
+            </div>
+            <label for="PriceRange">Цена доставки</label>
+            <input name="PriceRange" type="range" id="price-range" min="1000" max="100000" step="1000" value="50">
+            <div id="price-value"></div>
+            <script>
+                const priceRange = document.getElementById('price-range');
+                const priceValue = document.getElementById('price-value');
+                priceRange.addEventListener('input', () => {
+                    priceValue.textContent = priceRange.value;
+                });
+            </script>
+
+            <div id="error" style="color: red;"></div>
+            <button type="submit" id="create-delivery-button" name="create_delivery_button" value="@ViewBag.Id">Выбрать</button>
+        </div>
+    </form>
+
+    <div id="profile-storage-info">
+        <table>
+            <thead>
+                <tr>
+                    <th>Пункт выдачи</th>
+                    <th>Дата доставки</th>
+                    <th>Стоимость</th>
+                    <th>Тип транспорта</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.Countries != null)
+                {
+                    @foreach (var del in ViewBag.Countries)
+                    {
+                        <tr>
+                            @foreach (var adr in Model)
+                            {
+                                if (adr.Id == @del.Adress)
+                                {
+                                    <td>@adr.Address</td>
+                                }
+                            }
+
+                            <td>@del.DateTime</td>
+                            <td>@del.Price</td>
+                            <td>@del.Type</td>
+                            <td class="button-align">
+                                @using (Html.BeginForm("ProfileDelivery", "ProfileBuyer", FormMethod.Post))
+                                {
+                                    <button name="select-delivery" value="@ViewBag.Countries.IndexOf(del)">Выбрать</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="stylesheet" href="/css/profileBuyer.css">
+    <link rel="stylesheet" href="/css/createProduct.css">
+    <link rel="stylesheet" href="/css/companyProfile.css">
+    <link rel="stylesheet" href="/css/navigationProfile.css">
+    <title>Создать изделие</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="profile-data">
+        <span>@User.Identity.Name</span>
+    </div>
+
+    <div class="flex">
+        <div class="profile-nav">
+            <a href="/ProfileCompany/Index">Профиль</a>
+            <div class="nav-select">
+                <a href="/ProfileCompany/CreateProduct">Изделия</a>
+            </div>
+            <a href="/ProfileCompany/CreateStorageHouse">Выбрать склад или пункт выдачи</a>
+            <a href="/ProfileCompany/CreateRoads">Маршруты</a>
+            @using (Html.BeginForm("Logout", "ProfileCompany", FormMethod.Post))
+            {
+                <input type="submit" name="ProfileExit" value="Выйти">
+            }
+        </div>
+
+        <form class="main-form-create-product" id="main-form-create-product" asp-controller="ProfileCompany" sap-action="CreateProduct" method="post" enctype="multipart/form-data" onsubmit="return checkCreateProduct(this)">
+            <div>
+                <label for="Name">Название изделия:</label>
+                <input type="text" name="Name" placeholder="Название" id="name"><br><br>
+                <label for="Price">Цена:</label>
+                <input type="text" name="Price" placeholder="Цена" id="price"><br><br>
+                <label for="Size">Размер:</label>
+                <input type="text" name="Size" placeholder="Размер" id="size"><br><br>
+                <label for="Description">Описание:</label>
+                <input type="text" name="Description" placeholder="Описание" id="description"><br><br>
+            </div>
+            <div>
+                <label for="Picture">Изображение:</label>
+                <label for="picture">Выбрать файл</label>
+                <input type="file" name="Picture" id="picture"><br><br>
+                <img src="" id="preview" style="display: none;">
+                <label for="Mass">Масса:</label>
+                <input type="text" name="Mass" placeholder="Масса" id="mass"><br><br>
+                <div id="error" style="color: red;"></div>
+                <input type="submit" name="create-product-button" value="Создать изделие">
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/createProduct.js"></script>
+    <script src="/js/formControl.js"></script>
+</body>
+</html>

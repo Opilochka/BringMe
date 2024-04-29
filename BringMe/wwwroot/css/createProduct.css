@@ -1,0 +1,50 @@
+﻿.main-form-create-product {
+    font-size: 12px;
+    border-radius: 15px;
+    border: 2px solid #90FF39;
+    padding: 30px 30px;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    width: 1000px;
+}
+
+.main-form-create-product {
+    display: flex;
+}
+
+    .main-form-create-product label {
+        font-size: 1.2em;
+    }
+
+    .main-form-create-product input {
+        border-radius: 15px;
+        width: 210px;
+        height: 50px;
+        border-color: #90FF39;
+    }
+
+input[name="create-product-button"] {
+    position: inherit;
+}
+
+label[for="picture"] {
+    width: 210px;
+    height: 50px;
+    border: 1px #90FF39 solid;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-top: 0;
+    margin-top: 5px;
+    font-size: 1em;
+    color: #333333a1;
+}
+
+#picture {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}

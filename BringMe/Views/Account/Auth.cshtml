@@ -1,0 +1,32 @@
+﻿@model BringMe.Models.Auth
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Login</title>
+</head>
+<body>
+    <form id="main-form" method="post" asp-controller="AccountController" asp-action="Auth"  onsubmit="return loginCheckForm(this)">
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <h1>Войти в аккаунт</h1>
+        <label for="name">Логин:</label>
+        <input type="text" name="Login" placeholder="Логин" id="name"><br><br>
+
+        <label for="password">Пароль:</label>
+        <input type="password" name="Password" placeholder="Пароль" id="pass"><br><br>
+
+        <label for="remember">Запомнить меня?</label>
+        <input type="checkbox" name="RememberMe" id="remember"><br><br>
+
+        <div id="error" style="color: red;"></div>
+        <input type="submit" onclick="" name="login-button" value="Войти">
+    </form>
+
+    
+</body>
+</html>

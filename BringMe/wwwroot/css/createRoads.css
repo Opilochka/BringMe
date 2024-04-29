@@ -1,0 +1,64 @@
+﻿#main-form-create-roads {
+    border-radius: 15px;
+    border: 2px solid #90FF39;
+    padding: 30px 30px;
+    display: flex;
+    justify-content: flex-start;
+    height: 400px;
+    width: 1000px;
+}
+
+.main-form-create-roads input,
+select[name="Transport"],
+select[name="IdLocalityA"],
+select[name="IdLocalityB"] {
+    border-radius: 15px;
+    width: 210px;
+    height: 50px;
+    border-color: #90FF39;
+    margin-left: 130px;
+}
+
+.main-form-create-roads label {
+    margin-left: 130px;
+}
+
+.po-centru {
+    margin-left: 100px;
+}
+
+select {
+    color: #000000;
+    padding-left: 10px;
+}
+
+#idLocalityB,
+label[for="IdLocalityB"] {
+    margin-left: 130px;
+}
+
+input[name="create-road-button"] {
+    margin-top: 25px;
+    position: inherit;
+}
+
+table {
+    border-collapse: collapse;
+    width: 1065px;
+    margin-right: 25px;
+}
+
+th,
+td {
+    border: 2px solid #90FF39;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+button[name="delete"] {
+    all: unset;
+}

@@ -1,0 +1,38 @@
+﻿.flex {
+    display: flex;
+}
+
+#purchase-title {
+    width: 100%;
+    height: 55px;
+    border-radius: 15px;
+    background-color: #90FF39;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    #purchase-title label {
+        margin: 0;
+    }
+
+#profileNav {
+    padding-top: 0;
+}
+
+#navSelect {
+    border-radius: 0 15px 0 0;
+}
+
+#make-order {
+    position: inherit;
+    margin: auto;
+    color: #FFFFFF;
+    font-size: 0.9em;
+    font-weight: 600;
+    left: 0px;
+    color: #ffffff;
+}

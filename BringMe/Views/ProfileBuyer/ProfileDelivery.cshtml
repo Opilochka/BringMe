@@ -1,0 +1,130 @@
+﻿@model List<BringMe.Models.Product>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/profileBuyer.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Профиль</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="/Home/Index">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="profile-buyer-page">
+        <div class="profile-data" style="display:flex;align-items:center;flex-direction:column;">
+            <span style="margin-bottom:30px;">@User.Identity.Name</span>
+            @using (Html.BeginForm("Logout", "ProfileBuyer", FormMethod.Post))
+            {
+                <input style="position:inherit;background-color:red;" type="submit" name="ProfileExit" value="Выйти">
+            }
+        </div>
+
+        <div class="flex">
+            <div class="purchase-title">
+                <label for="purchase-title">Мои покупки</label>
+            </div>
+            
+
+            <div class="purchase-title">
+                <label for="purchase-title">Доставки</label>
+            </div>
+            <div id="rows">
+                @foreach (var product in Model)
+                {
+                    <div id="subrows">
+                        <div id="card" class="card">
+                            <img src="@product.ImageUrl" name="Picture" alt="stuff">
+                            <div class="card-title" name="Name">@product.Name</div>
+                            <div name="Size">@product.Size</div>
+                            <div name="Mass">@product.Mass</div>
+                            <div name="Description">@product.Description</div>
+                            <div class="price">
+                                <div class="card-title" name="Price">@product.Price</div>
+                                <input type="submit" class="make-order" name="CardDetails" value="Подробнее   >">
+                            </div>
+
+                        </div>
+                        <div id="city-names">
+                            @foreach(var adr in ViewBag.MyList)
+                            {
+                                <div>
+                                    <span class="city-name">@adr.ToString()</span>
+                                    <span class="city-value">В пути</span>
+                                </div>
+                            }
+                          
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cityNames = document.querySelectorAll("#city-names");
+
+        for (let i = 0; i < cityNames.length; i++) {
+            const cityValues = cityNames[i].getElementsByClassName("city-value");
+
+            for (let j = 0; j < cityValues.length; j++) {
+                if (cityValues[j].innerText === "пройдено") {
+                    cityValues[j].previousElementSibling.style.color = "#90FF39";
+                } else {
+                    cityValues[j].previousElementSibling.style.color = "#333";
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

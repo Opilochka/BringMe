@@ -1,0 +1,124 @@
+﻿@model IEnumerable<BringMe.Models.Locality>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="stylesheet" href="/css/profileBuyer.css">
+    <link rel="stylesheet" href="/css/companyProfile.css">
+    <link rel="stylesheet" href="/css/createStorageHouse.css">
+    <link rel="stylesheet" href="/css/navigationProfile.css">
+    <title>Добавить адрес склада или пункта выдачи</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="profile-data">
+        <span>>@User.Identity.Name</span>
+    </div>
+
+    <div class="flex">
+        <div class="profile-nav">
+            <a href="/ProfileCompany/Index">Профиль</a>
+            <a href="/ProfileCompany/CreateProduct">Изделия</a>
+            <div class="nav-select">
+                <a href="/ProfileCompany/CreateStorageHouse">Выбрать склад или пункт выдачи</a>
+            </div>
+            <a href="/ProfileCompany/CreateRoads">Маршруты</a>
+            @using (Html.BeginForm("Logout", "ProfileCompany", FormMethod.Post))
+            {
+                <input type="submit" name="ProfileExit" value="Выйти">
+            }
+        </div>
+
+        <div>
+            <form class="create-storagehouse" id="create-storagehouse" method="post" asp-controller="ProfileCompany" sap-action="createStorageHouse" onsubmit="return checkCreateStorageHouse(this)">
+                <label for="Address">Адрес:</label>
+                <input type="text" name="Address" placeholder="Адрес" id="address"><br><br>
+                <div name="check-storage">
+                    <label for="Warehouse">Это склад</label>
+                    <input type="checkbox" name="Warehouse" id="warehouse" value="true">
+                </div>
+                <div id="error" style="color: red;"></div>
+                <input type="submit" name="create-storage-button" value="Сохранить">
+            </form>
+
+            @* здесь бы тоже вывести склады с пунктами *@
+           
+
+            <div id="profile-storage-info">
+                <div id="profile-storage">
+                    <label for="">Склады</label>
+                    @* фигня просто эти дивы заменить *@
+                    @foreach(var loc in Model)
+                    {
+                        if (loc.Warehouse == true && loc.IdUser == ViewBag.Message)
+                        {
+                            <div>@loc.Address</div>
+                        }
+                    }
+                </div>
+                <div id="profile-pickup-point">
+                    <label for="">Пункты выдачи</label>
+                    @foreach (var loc in Model)
+                    {
+                        if (loc.Warehouse == false && loc.IdUser == ViewBag.Message)
+                        {
+                            <div>@loc.Address</div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/formControl.js"></script>
+</body>
+</html>

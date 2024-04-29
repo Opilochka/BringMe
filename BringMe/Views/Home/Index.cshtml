@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html id="noscroll" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <title>Главная</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+                <a href="/views/createProduct.html">Изделия</a>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="main-preview">
+        <div class="main-title">
+            Быстрая доставка для вас<br>
+            на выгодных условиях
+        </div>
+        <div class="main-subtitle">
+            С нами можно легко найти удобный пункт<br>
+            выдачи и рассчитать стоимость
+        </div>
+        <a class="button-to-reg" href="/Account/Registration">
+            <div><label>Стать клиентом</label></div>
+        </a>
+    </div>
+
+    <div class="kruzjok-container">
+        <div class="krug1">
+            <label>Удобная оплата</label><br>
+            <div>
+                &bull; защита<br>
+                персональных<br>
+                данных<br>
+                &bull; возможность<br>
+                выбора способа<br>
+                оплаты
+            </div>
+        </div>
+        <div class="krug2">
+            <label>Дёшево</label><br>
+            <div>
+                &bull; скидки<br>
+                без наценки<br>
+                &bull; специальные<br>
+                приложения
+            </div>
+        </div>
+        <div class="krug3">
+            <label>Быстро</label><br>
+            &bull; гарантия доставки в<br>
+            срок<br>
+            &bull; экспресс-доставка<br>
+            от 2 часов
+        </div>
+        <div class="krug4">
+            <label>Надёжно</label><br>
+            &bull; безопасность<br>
+            товаров<br>
+            &bull; качественная<br>
+            упаковка<br>
+            &bull; конфеденциальность<br>
+            данных
+        </div>
+        <div class="krug4 move4"></div>
+        <div class="krug5"></div>
+        <div class="krug5 move5-2"></div>
+        <div class="krug5 move5-3"></div>
+        <div class="krug6"></div>
+        <div class="krug6 move6-2"></div>
+        <div class="krug7"></div>
+        <div class="krug7 move7-2"></div>
+        <div class="krug8"></div>
+        <div class="krug8 move8-2"></div>
+    </div>
+
+    <div class="main-description">
+        <div class="main-description-one">
+            <div name="descrip-one">
+                «ПРИВЕЗИ!» — портал (бесплатная база поставщиков
+                и производителей) по поиску поставщиков. Помогает
+                налаживать контакты с потенциальными партнерами
+                и заказчиками по России и находить новых клиентов.
+                Вы можете найти поставщиков и купить товары от
+                производителей, а также следить за актуальными
+                новостями о заказах и поставщиках и делать заказы
+                прямо через сайт. Есть возможность размещать
+                закупки — запросы на покупку товаров.
+            </div>
+            <div name="descrip-two">
+                «ПРИВЕЗИ!» С 2024 года помогает десяткам тысяч
+                компаний развивать свой бизнес и увеличивать
+                продажи. А для покупателей мы делаем поиск
+                поставщиков проще. Для любых целей, будь то
+                продажа на маркетплейсах, расширение
+                ассортимента товара или поиск лучших цен.
+            </div>
+        </div>
+        <div class="our-team">
+            Данный проект создан для участия в  Онлайн Хакатон «КодРок» 2024 командой “NFT котики”
+        </div>
+        <div class="authors">
+            <div class="authors-one">
+                <label for="roles">Роли в команде:</label>
+                Вавилов Андрей - фронтенд<br>
+                Валиева Ольга - бекенд<br>
+                Мурызова Валерия - дизайнер<br>
+                Якушина Анна - проджект менеджер
+            </div>
+            <div class="authors-two">
+                <label for="contacts">Наши контакты:</label>
+                (https://t.me/dron285)<br>
+                (https://t.me/Opilochka45)<br>
+                (https://t.me/Ystaliykotik)<br>
+                (https://t.me/Neudachnik_ya)
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Следите за нами в соцсетях:
+        <a href="https://vk.com/code_rocks_hack_2024"><img src="/lib/vk.png" alt="vk"></a>
+    </footer>
+</body>
+</html>

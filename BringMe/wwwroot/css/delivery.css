@@ -1,0 +1,115 @@
+﻿#main-form-create-delivery {
+    width: auto;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 30px;
+    border-radius: 15px;
+    border: 2px solid #90FF39;
+}
+
+    #main-form-create-delivery input[type="text"],
+    select[name="PickupPoint"],
+    select[name="TypeTransport"] {
+        border-radius: 15px;
+        width: 210px;
+        height: 50px;
+        color: #333;
+        padding: 10px 10px;
+        border-color: #90FF39;
+    }
+
+.otstup input,
+select {
+    margin-bottom: 30px;
+}
+
+input[name="DataDelivery"] {
+    all: unset;
+}
+
+#dateDelivery {
+    border-radius: 15px;
+    width: 187px;
+    height: 46px;
+    color: #333;
+    margin-bottom: 50px;
+    padding: 0 10px;
+    text-decoration: none;
+    border: 1px solid #90FF39;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#delivery-select-container {
+    border-radius: 15px;
+    border: 2px solid #90FF39;
+    padding: 10px 30px;
+}
+
+div[name="delivery-select-radio"] {
+    display: flex;
+    align-items: center;
+}
+
+    div[name="delivery-select-radio"] label {
+        position: relative;
+        bottom: 24px;
+        left: 20px;
+    }
+
+input[name="PriceRange"] {
+    background: #90FF39;
+    margin-bottom: 30px;
+    width: 250px;
+    cursor: pointer;
+}
+
+#profileExit {
+    color: white;
+    background-color: #DB2A2A;
+    position: inherit;
+}
+
+    #profileExit:hover {
+        background-color: #C90B0B;
+    }
+
+#create-delivery-button {
+    width: 300px;
+    height: 50px;
+    position: inherit;
+    color: white;
+}
+
+table {
+    border-collapse: collapse;
+    width: 1400px;
+}
+
+th,
+td {
+    border: 2px solid #90FF39;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
+button[name="select-delivery"] {
+    all: unset;
+    cursor: pointer;
+    background-color: #90FF39;
+    border-radius: 15px;
+    padding: 10px 20px;
+}
+
+.button-align {
+    display: flex;
+    justify-content: center;
+    border-top: none;
+    border-left: none;
+}

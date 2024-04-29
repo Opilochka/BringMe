@@ -1,0 +1,167 @@
+﻿@model BringMe.Models.Way
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/scrollbar.css">
+    <link rel="stylesheet" href="/css/createRoads.css">
+    <link rel="stylesheet" href="/css/profileBuyer.css">
+    <link rel="stylesheet" href="/css/companyProfile.css">
+    <link rel="stylesheet" href="/css/navigationProfile.css">
+    <link rel="stylesheet" href="/css/createStorageHouse.css">
+    <title>Создать пути</title>
+</head>
+<body>
+    <header>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @if (User.IsInRole("company"))
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileCompany/Index">Профиль</a>
+                </div>
+            }
+            else
+            {
+                <div class="index-container">
+                    <img src="/lib/listik.png" alt="listik">
+                    <a href="">Привези</a>
+                    <a href="/Home/Catalog">Каталог</a>
+                    <button name="onasButton" onclick="window.scrollBy({top: 2800, behavior: 'smooth'});">О нас</button>
+                </div>
+                <div class="index-container">
+                    <a href="/ProfileBuyer/ProfileDelivery">Профиль</a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="index-container">
+                <img src="/lib/listik.png" alt="listik">
+                <a href="">Привези</a>
+                <a href="/Home/Catalog">Каталог</a>
+                <button name="onasButton" onclick="">О нас</button>
+            </div>
+            <div class="index-container">
+                <a id="reg" href="/Account/Registration">Регистрация</a>
+                <div class="log-bord">
+                    <a id="log" href="/Account/Auth">Войти</a>
+                </div>
+            </div>
+        }
+    </header>
+
+    <div class="profile-data">
+        <span>@User.Identity.Name</span>
+    </div>
+
+    <div class="flex">
+        <div class="profile-nav">
+            <a href="/ProfileCompany/Index">Профиль</a>
+            <a href="/ProfileCompany/CreateProduct">Изделия</a>
+            <a href="/ProfileCompany/CreateStorageHouse">Выбрать склад или пункт выдачи</a>
+            <div class="nav-select">
+                <a href="/ProfileCompany/CreateRoads">Маршруты</a>
+            </div>
+            @using (Html.BeginForm("Logout", "ProfileCompany", FormMethod.Post))
+            {
+                <input type="submit" name="ProfileExit" value="Выйти">
+            }
+        </div>
+
+        <div>
+            <form class="main-form-create-roads" id="main-form-create-roads" method="post" asp-controller="ProfileCompany" sap-action="CreateRoads"  onsubmit="return checkCreateProduct(this)">
+                <div>
+                    <label for="IdLocalityA">Пункт 1:</label>
+                    <select name="IdLocalityA" placeholder="Пункт 1" id="idLocalityA" >
+                        @foreach (var locality in ViewBag.Countries)
+                        {
+                            @if (locality.IdUser == ViewBag.Message)
+                            {
+                                <option value="@locality.Id">@locality.Address</option>
+                            }
+                        }
+                    </select>
+                    <br><br>
+                
+                    <label for="Price">Стоимость:</label>
+                    <input type="text" name="Price" placeholder="Стоимость" id="price"><br><br>
+                    <label for="Time">Время доставки:</label>
+                    <input type="text" name="Time" placeholder="Время доставки" id="time"><br><br>
+                </div>
+                <div>
+                    <label for="IdLocalityB">Пункт 2</label>
+                
+                    <select name="IdLocalityB" id="idLocalityB">
+                        @foreach (var locality in ViewBag.Countries)
+                        {
+                            @if (locality.IdUser == ViewBag.Message)
+                            {
+                                <option value="@locality.Id">@locality.Address</option>
+                            }
+                        }
+                    </select>
+                    <label for="Distance">Расстояние:</label>
+                    <input type="text" name="Distance" placeholder="Расстояние" id="distance"><br><br>
+                    <label for="Transport">Тип доставки:</label>
+                    <select name="Transport">
+                        <option value="На авто">На авто</option>
+                        <option value="Самолетом">Самолетом</option>
+                        <option value="Кораблем">Кораблем</option>
+                        <option value="Поездом">Поездом</option>
+                    </select>
+                    <div id="error" style="color: red;"></div>
+                    <input type="submit" name="create-road-button" value="Сохранить">
+                </div>
+            </form>
+
+            <div id="profile-storage-info">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Пункт 1</th>
+                            <th>Пункт 2</th>
+                            <th>Стоимость</th>
+                            <th>Расстояние</th>
+                            <th>Время доставки</th>
+                            <th>Тип транспорта</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (ViewBag.MyList != null)
+                        {
+                            @foreach (var way in ViewBag.MyList)
+                            {
+                                <tr>
+                                    <td>@way.IdLocalityA</td>
+                                    <td>@way.IdLocalityB</td>
+                                    <td>@way.Price</td>
+                                    <td>@way.Distance</td>
+                                    <td>@way.Time</td>
+                                    <td>@way.Transport</td>
+                                    <td><button name="delete"><img src="/img/delete.png" alt="delete"></button></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/createProduct.js"></script>
+    <script src="/js/formControl.js"></script>
+</body>
+</html>
